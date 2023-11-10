@@ -1,9 +1,14 @@
-#include <string>
-#include <sstream>
+def get_mac_address_type(mac_address):
+octets = mac_address.split(':')
+first_octet = int(octets[0], 16)  # Convert the first octet to decimal
 
-std::string problemSolution4(const std::string &macAddress) {
-    // write your code here
+if first_octet == 255:  # Check if all octets are 0xFF
+return "Broadcast"
+elif first_octet % 2 == 0:  # Check if the first octet is even
+return "Unicast"
+else:
+return "Multicast"
 
-    // make use of control flow statements
-    // return result;
-}
+mac_address = input("Enter the MAC address in x:x:x:x:x:x form: ")
+address_type = get_mac_address_type(mac_address)
+print("The MAC address type is:", address_type)
