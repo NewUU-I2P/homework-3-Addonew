@@ -1,14 +1,39 @@
-def get_mac_address_type(mac_address):
-octets = mac_address.split(':')
-first_octet = int(octets[0], 16)  # Convert the first octet to decimal
+#include <iostream>
+#include <sstream>
+#include <string>
 
-if first_octet == 255:  # Check if all octets are 0xFF
-return "Broadcast"
-elif first_octet % 2 == 0:  # Check if the first octet is even
-return "Unicast"
-else:
-return "Multicast"
+int main() {
+    std::string macAddress;
 
-mac_address = input("Enter the MAC address in x:x:x:x:x:x form: ")
-address_type = get_mac_address_type(mac_address)
-print("The MAC address type is:", address_type)
+    // Input MAC address
+    std::cout << "Enter MAC address (in x:x:x:x:x:x format): ";
+    std::cin >> macAddress;
+
+    // Validate the MAC address format
+    std::istringstream iss(macAddress);
+    int octet;
+    char delimiter;
+
+    for (int i = 0; i < 5; ++i) {
+        if (!(iss >> std::hex >> octet) || !(iss >> delimiter) || delimiter != ':') {
+            std::cout << "Invalid MAC address format." << std::endl;
+            return 1; // Exit with an error code
+        }
+    }
+
+    if (!(iss >> std::hex >> octet)) {
+        std::cout << "Invalid MAC address format." << std::endl;
+        return 1; // Exit with an error code
+    }
+
+    // Determine the type of MAC address
+    if (octet == 0xFF) {
+        std::cout << "The MAC address is broadcast." << std::endl;
+    } else if (octet % 2 == 0) {
+        std::cout << "The MAC address is unicast." << std::endl;
+    } else {
+        std::cout << "The MAC address is multicast." << std::endl;
+    }
+
+    return 0;
+}
