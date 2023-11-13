@@ -1,23 +1,44 @@
-def get_description(sex, height):
-if sex.lower() == "male":
-if height < 1.70:
-return "Short"
-elif height >= 1.70 and height < 1.85:
-return "Normal"
-else:
-return "Tall"
-elif sex.lower() == "female":
-if height < 1.60:
-return "Short"
-elif height >= 1.60 and height < 1.75:
-return "Normal"
-else:
-return "Tall"
-else:
-return "Invalid sex input"
+#include <iostream>
+#include <string>
 
-sex = input("Enter the person's sex (Male/Female): ")
-height = float(input("Enter the person's height in meters: "))
+int main() {
+    char sex;
+    double height;
 
-result = get_description(sex, height)
-print("Description for the height:", result)
+    // Input sex
+    std::cout << "Enter sex (M/F): ";
+    std::cin >> sex;
+
+    // Input height
+    std::cout << "Enter height in meters: ";
+    std::cin >> height;
+
+    std::string result;
+
+    // Determine the description based on sex and height
+    if (sex == 'M') {
+        if (height < 1.70) {
+            result = "Short";
+        } else if (height >= 1.70 && height < 1.85) {
+            result = "Normal";
+        } else {
+            result = "Tall";
+        }
+    } else if (sex == 'F') {
+        if (height < 1.60) {
+            result = "Short";
+        } else if (height >= 1.60 && height < 1.75) {
+            result = "Normal";
+        } else {
+            result = "Tall";
+        }
+    } else {
+        std::cout << "Invalid input for sex. Please enter 'M' or 'F'." << std::endl;
+        return 1; // Exit with an error code
+    }
+
+    // Display the result
+    std::cout << "Result: " << result << std::endl;
+
+    return 0;
+}
