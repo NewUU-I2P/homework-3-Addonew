@@ -1,29 +1,40 @@
-def calculate_water_cost(consumption):
-fixed_amount = 13
-cost = fixed_amount
-remaining_consumption = consumption
+#include <iostream>
 
-if remaining_consumption > 30:
-cost += 30 * 0.4
-remaining_consumption -= 30
-else:
-return cost + remaining_consumption * 0.4
+int main() {
+    double waterConsumption;
+    std::cout << "Enter the water consumption in cubic meters: ";
+    std::cin >> waterConsumption;
 
-if remaining_consumption > 20:
-cost += 20 * 0.12
-remaining_consumption -= 20
-else:
-return cost + remaining_consumption * 0.12
+    double cost = 13.0;  // Fixed amount
+    double remainingConsumption = waterConsumption; // Remaining consumption to be charged
 
-if remaining_consumption > 10:
-cost += 10 * 1.4
-remaining_consumption -= 10
-else:
-return cost + remaining_consumption * 1.4
+    if (remainingConsumption > 30) {
+        cost += 30 * 0.4; // Charge for the first 30 cubic meters
+        remainingConsumption -= 30;
+    } else {
+        cost += remainingConsumption * 0.4;
+        remainingConsumption = 0;
+    }
 
-cost += remaining_consumption * 1.5
-return cost
+    if (remainingConsumption > 20) {
+        cost += 20 * 0.12; // Charge for the next 20 cubic meters
+        remainingConsumption -= 20;
+    } else {
+        cost += remainingConsumption * 0.12;
+        remainingConsumption = 0;
+    }
 
-        consumption = float(input("Enter water consumption in cubic metres: "))
-total_cost = calculate_water_cost(consumption)
-print("Total cost is:", total_cost)
+    if (remainingConsumption > 10) {
+        cost += 10 * 1.4; // Charge for the next 10 cubic meters
+        remainingConsumption -= 10;
+    } else {
+        cost += remainingConsumption * 1.4;
+        remainingConsumption = 0;
+    }
+
+    cost += remainingConsumption * 1.5; // Charge for every additional cubic meter
+
+    std::cout << "Total cost: $" << cost << std::endl;
+
+    return 0;
+}
