@@ -1,26 +1,41 @@
-# Function to perform arithmetic operations
-def calculate(op, num1, num2):
-if op == '+':
-return num1 + num2
-        elif op == '-':
-return num1 - num2
-        elif op == '*':
-return num1 * num2
-elif op == '/':
-if num2 != 0:
-return num1 / num2
-else:
-return "Error: Division by zero"
-else:
-return "Error: Invalid operation"
+#include <iostream>
 
-# Reading input from the user
-operation = input("Enter the arithmetic operation (+, -, *, /): ")
-num1 = float(input("Enter the first number: "))
-num2 = float(input("Enter the second number: "))
+int main() {
+    char operation;
+    int operand1, operand2;
 
-# Performing the calculation
-result = calculate(operation, num1, num2)
+    // Input arithmetic operation
+    std::cout << "Enter the arithmetic operation (+, -, *, /): ";
+    std::cin >> operation;
 
-# Displaying the result
-print("The result of the operation is:", result)
+    // Input operands
+    std::cout << "Enter the first integer: ";
+    std::cin >> operand1;
+
+    std::cout << "Enter the second integer: ";
+    std::cin >> operand2;
+
+    // Perform the arithmetic operation and display the result
+    switch (operation) {
+        case '+':
+            std::cout << "Result: " << operand1 + operand2 << std::endl;
+            break;
+        case '-':
+            std::cout << "Result: " << operand1 - operand2 << std::endl;
+            break;
+        case '*':
+            std::cout << "Result: " << operand1 * operand2 << std::endl;
+            break;
+        case '/':
+            if (operand2 != 0) {
+                std::cout << "Result: " << static_cast<double>(operand1) / operand2 << std::endl;
+            } else {
+                std::cout << "Error: Division by zero is not allowed." << std::endl;
+            }
+            break;
+        default:
+            std::cout << "Error: Invalid arithmetic operation." << std::endl;
+    }
+
+    return 0;
+}
